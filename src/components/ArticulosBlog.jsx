@@ -20,17 +20,21 @@ export default function ArticulosBlog() {
     }, []);
 
     if (isLoading) return <h1>Cargando articulos...</h1>;
-    if (error) return<h1> Error: {error}</h1>;
+    if (error) return<h1> Error: {error.message}</h1>;
 
     return (
         <div className="articulos">
             <h2>Articulos de mi blog</h2>
-            {articulos.map(articulo => (
+            {articulos.length === 0 ? (
+                <p>No hay artículos disponibles.</p> 
+             ) : (     
+                articulos.map(articulo => (
                 <div className="card" key={articulo.id}>
                     <h3>{articulo.title}</h3>
                     <p>{articulo.body}</p>
                 </div>
-            ))}
+            ))
+            )}
         </div>
-    )
+    );
 }
